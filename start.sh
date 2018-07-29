@@ -19,7 +19,7 @@ echo "
 # ___ Démarrer le serveur REST Composer v0.19  (localhost:3000) ___ #
 # _________________________________________________________________ #
 "
-composer-rest-server -c admin@tutorial-network -n never -w true &
+composer-rest-server -c admin@package-traceability-network -n never -w true &
 sleep 3
 
 echo "
