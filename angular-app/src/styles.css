@@ -15,11 +15,11 @@
 
 body{
     font-size: 100%;
-    background-color: #ccddee;
+    background-color: #eeeeee;
 }
 
 .navbar.navbar-inverse{
-    background-color: #f4f4f4 !important;
+    background-color: #adbccc !important;
     color:#444;
 }
 
