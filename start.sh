@@ -1,9 +1,19 @@
 echo "
-# _________________________ #
-# ___ Démarrer RabbitMQ ___ #
-# _________________________ #
+# ________________________________________________ #
+# ___ Démarrer le serveur de messages RabbitMQ ___ #
+# ________________________________________________ #
 "
 docker start package-traceability-rabbit
+
+
+echo "
+# _____________________________________________________________ #
+# ___ Démarrer l'acquisition de données des entrepots fixes ___ #
+# _____________________________________________________________ #
+"
+cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp
+npm start
+
 
 echo "
 # ____________________________ #
@@ -13,6 +23,7 @@ echo "
 cd ~/fabric-dev-servers/fabric-scripts/hlfv1/composer
 docker-compose start 
 sleep 3
+
 
 echo "
 # _________________________________________________________________ #
