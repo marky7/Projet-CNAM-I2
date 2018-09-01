@@ -1,0 +1,158 @@
+import org.example.*
+ 
+namespace org.example.mynetwork
+ 
+asset Acquisition identified by acquisitionId {
+  o String acquisitionId
+  o DateTime creationDate
+  --> StorageArea storageArea
+  --> Tag[] tags
+  --> Measure[] measures
+}
+
+asset Assignment identified by assignmentId {
+  o String assignmentId
+  o DateTime startDate
+  o DateTime endDate
+  o DateTime creationDate
+  --> Mission mission
+  --> DeliveryMan deliveryMan
+  --> MovingPlace movingPlace
+}
+asset DeliveryRoute identified by deliveryRouteId  {
+  o String deliveryRouteId
+  o DateTime creationDate
+  --> MovingPlace movingPlace
+  --> Route[] routes
+}
+asset Storage identified by storageId {
+  o String storageId
+  o DateTime startDate
+  o DateTime endDate
+  o DateTime creationDate
+  --> StorageArea storageArea
+  --> Package package
+}
+
+asset Attachment identified by attachmentId {
+  o String attachmentId
+  o String name
+  o String path
+  o DateTime creationDate
+  --> Package package
+}
+asset Alert identified by alertId {
+  o String alertId
+  o String description
+  o String type
+  o String status
+  o DateTime creationDate
+  --> User[] users
+  --> Package package
+}
+asset Country identified by countryId {
+  o String countryId
+  o String name
+  o DateTime creationDate
+}
+asset FixedPlace extends StorageArea {
+  o String address
+  o String description
+}
+
+asset Gas extends Measure {
+  o Double value
+  --> TreatedGas[] measuredGas
+}
+
+abstract asset Measure identified by measureId {
+  o String measureId
+  o String type
+  o DateTime creationDate
+}
+asset Mission identified by missionId {
+  o String missionId
+  o String description
+  o String status
+  o DateTime creationDate
+  --> MissionType missionType
+}
+asset MissionType identified by missionTypeId {
+  o String missionTypeId
+  o String description
+  o DateTime creationDate
+}
+asset MovingPlace extends StorageArea {
+  o String type
+  o String capacity
+  o String description
+}
+asset Package identified by packageId {
+  o String packageId
+  o String description
+  o DateTime creationDate
+  o DateTime deliveryDate
+  --> Customer customer
+  --> Provider provider
+  --> Tag tag
+  --> Attachment[] attachments
+  --> Product[] products
+}
+asset PositionGPS extends Measure {
+  o Double latitude
+  o Double longitude
+}
+asset Product identified by productId {
+  o String productId
+  o String label
+  o String description
+  o DateTime creationDate
+  --> ProductProfile productProfile
+}
+
+asset ProductProfile identified by productProfileId {
+  o String productProfileId
+  o String label
+  o String description
+  o DateTime creationDate
+  --> Standart[] standarts
+}
+asset Route identified by routeId {
+  o String routeId
+  o String description
+  o DateTime creationDate
+}
+asset Rule identified by ruleId {
+  o String ruleId
+  o String description
+  o String type
+  o DateTime creationDate
+}
+asset Standart identified by standartId {
+  o String standartId
+  o String description
+  o DateTime creationDate
+  --> Country[] country
+  --> Rule[] rules
+}
+abstract asset StorageArea identified by storageAreaId {
+  o String storageAreaId
+  o Boolean isMobile
+  o DateTime creationDate
+}
+
+asset TreatedGas identified by treatedGasId {
+  o String treatedGasId
+  o String name
+  o String description
+  o DateTime creationDate
+}
+asset TemperatureHumidity extends Measure {
+  o Double temperature
+  o Double humidity
+}
+asset Tag identified by tagId {
+  o String tagId
+  o String valeur
+  o DateTime creationDate
+}
