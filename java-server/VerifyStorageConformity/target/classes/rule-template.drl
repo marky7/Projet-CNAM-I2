@@ -1,0 +1,21 @@
+template header
+
+rule
+measure
+
+package com.tracability.main
+ 
+import com.tracability.main.AlertDecision;
+
+global AlertDecision alertDecision;
+
+template "alert"
+
+rule "alert_@{row.rowNumber}"
+when
+    @{measure}(@{rule})
+then
+    alertDecision.setDoAlert(Boolean.TRUE);
+end
+
+end template
