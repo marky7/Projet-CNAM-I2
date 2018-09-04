@@ -1,5 +1,3 @@
-import org.example.*
- 
 namespace org.example.mynetwork
  
 asset Acquisition identified by acquisitionId {
@@ -156,3 +154,27 @@ asset Tag identified by tagId {
   o String valeur
   o DateTime creationDate
 }
+
+participant Customer extends User {
+}
+
+participant DeliveryMan extends User {
+}
+participant Supervisor extends User {
+}
+
+abstract participant User identified by userId {
+  o String userId
+  o String firstname
+  o String lastname
+  o String organisation
+  o String login
+  o String password
+  o String phone
+  o String email
+  o String roles
+  o DateTime creationDate
+}
+participant Provider extends User {
+}
+
