@@ -14,7 +14,37 @@
 // console.log('data received: ' + data);
 // });
 //});
+
+
+var getNow = function(){
+    return new Date().toISOString();
+}
+
+//**************************************** DEFAULT DATA ****************************************//
+// Create Default DATA to send via RabbitMQ
+
+
+// Bluetooth Devices detected
+var createBluetoothDevicesDetected = function(){
+    return ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+}
+
+// Temperature and Humidity detected
+var createTemperatureHumidity = function(){
+    var creationDate = getNow();
+    return {temperature:25, temperatureUnit:'°C', humidity:35, humidityUnit:'%', creationDate:creationDate};
+}
+
+// Gaz Detected
+var createMeasuredGas = function(){
+    var creationDate = getNow();
+    return [{name:'CO2',description:'',value:'1',unit:'%',creationDate:creationDate},{name:'O2',description:'',value:'50',unit:'%',creationDate:creationDate}];
+}
+
+
 //**************************************** ALEXIS ****************************************//
+
+
 // Message à envoyer
 var messageToSent;
 // Instanciation des données reçues de l'arduino
