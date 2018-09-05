@@ -1,5 +1,166 @@
 namespace org.example.mynetwork
- 
+
+transaction tagCreation {
+  o String valeur
+  o DateTime creationDate
+}
+
+transaction treatedGasCreation {
+  o String name
+  o String description
+  o DateTime creationDate
+}
+
+transaction ruleCreation {
+  o String description
+  o String type
+  o DateTime creationDate
+}
+
+transaction routeCreation {
+  o String description
+  o DateTime creationDate
+}
+
+
+transaction missionTypeCreation {
+  o String capacity
+  o String description
+}
+
+
+transaction countryCreation {
+  o String name
+  o DateTime creationDate
+}
+
+transaction productCreation{
+  o String label
+  o String description
+  o DateTime creationDate
+  --> ProductProfile productProfile
+}
+
+transaction missionCreation
+{
+  o String description
+  o String status
+  o DateTime creationDate
+  --> MissionType missionType
+}
+
+transaction attachmentCreation {
+  o String name
+  o String path
+  o DateTime creationDate
+  --> Package package
+}
+
+
+transaction storageCreation {
+  o DateTime startDate
+  o DateTime endDate
+  o DateTime creationDate
+  --> StorageArea storageArea
+  --> Package package
+}
+
+transaction assignmentCreation {
+  o DateTime startDate
+  o DateTime endDate
+  o DateTime creationDate
+  --> Mission mission
+  --> DeliveryMan deliveryMan
+  --> MovingPlace movingPlace
+}
+
+transaction positionGPSCreation
+{
+  o String type
+  o DateTime creationDate
+  o Double latitude
+  o Double longitude
+}
+
+transaction temperatureHumidityCreation
+{
+  o String type
+  o DateTime creationDate
+  o Double temperature
+  o Double humidity
+}
+
+transaction movingPlaceCreation
+{
+  o Boolean isMobile
+  o DateTime creationDate
+  o String type
+  o String capacity
+  o String description
+}
+
+transaction fixedPlaceCreation {
+  o Boolean isMobile
+  o DateTime creationDate
+  o String address
+  o String description
+}
+
+transaction gasCreation {
+  o String type
+  o DateTime creationDate
+  o Double value
+  --> TreatedGas[] measuredGas
+}
+
+transaction standartCreation {
+  o String description
+  o DateTime creationDate
+  --> Country[] country
+  --> Rule[] rules
+}
+
+transaction productProfileCreation {
+  o String label
+  o String description
+  o DateTime creationDate
+  --> Standart[] standarts
+}
+
+transaction packageCreation {
+  o String description
+  o DateTime creationDate
+  o DateTime deliveryDate
+  --> Customer customer
+  --> Provider provider
+  --> Tag tag
+  --> Attachment[] attachments
+  --> Product[] products
+}
+
+
+transaction alertCreation {
+  o String description
+  o String type
+  o String status
+  o DateTime creationDate
+  --> User[] users
+  --> Package package
+}
+
+transaction deliveryRouteCreation {
+  o DateTime creationDate
+  --> MovingPlace movingPlace
+  --> Route[] routes
+}
+
+transaction acquisitionCreation {
+  o DateTime creationDate
+  --> StorageArea storageArea
+  --> Tag[] tags
+  --> Measure[] measures
+}
+
 asset Acquisition identified by acquisitionId {
   o String acquisitionId
   o DateTime creationDate
@@ -154,7 +315,6 @@ asset Tag identified by tagId {
   o String valeur
   o DateTime creationDate
 }
-
 participant Customer extends User {
 }
 
