@@ -73,6 +73,7 @@ var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
 var mac_addresses = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
 
 var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
+var acquisitionToString = acquisition.toString();
 
 //**************************************** ALEXIS ****************************************//
 // Message à envoyer
