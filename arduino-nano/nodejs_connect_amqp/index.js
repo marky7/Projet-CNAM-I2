@@ -14,6 +14,7 @@
 // console.log('data received: ' + data);
 // });
 //});
+
 var getNow = function(){
     return new Date().toISOString();
 };
@@ -61,14 +62,17 @@ function Tag(valeur){
 }
 
 var tags = [];
-for(var i=0;i<macAdresses.length;i++){
-   tags.push(new Tag(macAdresses[i]));
-}
 
 var gaz1 = new Gaz('CO2','1','%');
 var gaz2 = new Gaz('O2','25','%');
 var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
 var mac_addresses = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+
+// Create Tags
+for(var i=0;i<macAdresses.length;i++){
+   tags.push(new Tag(macAdresses[i]));
+}
+
 
 var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
 var acquisitionToString = acquisition.toString();
