@@ -62,6 +62,12 @@ function Acquisition(measures,tags){
     this.tags: tags;
 };
 
+function Tag(){
+    
+}
+
+var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity]);
+
 //**************************************** ALEXIS ****************************************//
 
 
