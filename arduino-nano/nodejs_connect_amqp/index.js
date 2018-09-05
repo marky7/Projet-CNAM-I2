@@ -14,6 +14,63 @@
 // console.log('data received: ' + data);
 // });
 //});
+<<<<<<< HEAD
+=======
+
+
+var getNow = function(){
+    return new Date().toISOString();
+};
+
+//**************************************** DEFAULT DATA ****************************************//
+// Create Default DATA to send via RabbitMQ
+
+function FixedPlace(place,description){
+    this.address = place;
+    this.description = description;
+    this.isMobile = false;
+    this.creationDate = getNow();
+};
+
+// Temperature and Humidity detected
+function TemperatureHumidity(temperature,temperatureUnit,humidity,humidityUnit){
+    this.type = 'temperatureHumidity';
+    this.creationDate = getNow();
+    this.temperature = temperature;
+    this.temperatureUnit = temperatureUnit;
+    this.humidity = humidity;
+    this.humidityUnit = humidityUnit;
+};
+
+// Gaz Detected
+function Gaz(name,value,unit,description){
+    this.type = 'gaz';
+    this.name = name;
+    this.value = value;
+    this.unit = unit;
+    this.creationDate = getNow();
+    this.description = description;
+};
+
+var gaz1 = new Gaz('CO2','1','%');
+var gaz2 = new Gaz('O2','25','%');
+var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
+var bluetoothDevicesDetected = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+
+function Acquisition(measures,tags){
+    this.creationDate = getNow();
+    this.storageArea = '';
+    this.measures: measures;
+    this.tags: tags;
+};
+
+function Tag(){
+    
+}
+
+var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity]);
+
+>>>>>>> 8722397e96a0d1640f5fc726100047c570f27936
 //**************************************** ALEXIS ****************************************//
 // Message à envoyer
 var messageToSent;
