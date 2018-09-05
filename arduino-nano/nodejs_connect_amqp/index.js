@@ -79,12 +79,10 @@ console.log(acquisitionToString);
 
 //**************************************** ALEXIS ****************************************//
 // Message à envoyer
-var messageToSent;
 // Instanciation des données reçues de l'arduino
 // Tag bluetooth du colis
-var id = 1574581;
+var messageToSent = "157458";
 // Chargement du message
-messageToSent.concat(id);
 
 // Nous ne pouvons pas anticiper comment les mesures seront envoyées
 // Sinon, il faudrait reconnaître le type de colis que c'est avant de push les mesures
