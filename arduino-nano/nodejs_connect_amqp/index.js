@@ -14,8 +14,6 @@
 // console.log('data received: ' + data);
 // });
 //});
-<<<<<<< HEAD
-=======
 
 
 var getNow = function(){
@@ -30,7 +28,7 @@ function FixedPlace(place,description){
     this.description = description;
     this.isMobile = false;
     this.creationDate = getNow();
-};
+}
 
 // Temperature and Humidity detected
 function TemperatureHumidity(temperature,temperatureUnit,humidity,humidityUnit){
@@ -40,7 +38,7 @@ function TemperatureHumidity(temperature,temperatureUnit,humidity,humidityUnit){
     this.temperatureUnit = temperatureUnit;
     this.humidity = humidity;
     this.humidityUnit = humidityUnit;
-};
+}
 
 // Gaz Detected
 function Gaz(name,value,unit,description){
@@ -50,27 +48,32 @@ function Gaz(name,value,unit,description){
     this.unit = unit;
     this.creationDate = getNow();
     this.description = description;
-};
-
-var gaz1 = new Gaz('CO2','1','%');
-var gaz2 = new Gaz('O2','25','%');
-var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
-var bluetoothDevicesDetected = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+}
 
 function Acquisition(measures,tags){
     this.creationDate = getNow();
     this.storageArea = '';
     this.measures: measures;
     this.tags: tags;
-};
-
-function Tag(){
-    
 }
 
-var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity]);
+function Tag(valeur){
+    this.valeur = valeur;
+    this.creationDate = getNow();
+}
 
->>>>>>> 8722397e96a0d1640f5fc726100047c570f27936
+var tags = [];
+for(var i=0;i<macAdresses.length;i++){
+   tags.push(new Tag(macAdresses[i]));
+}
+
+var gaz1 = new Gaz('CO2','1','%');
+var gaz2 = new Gaz('O2','25','%');
+var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
+var mac_addresses = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+
+var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
+
 //**************************************** ALEXIS ****************************************//
 // Message à envoyer
 var messageToSent;
