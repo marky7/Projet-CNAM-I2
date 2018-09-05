@@ -1,5 +1,7 @@
 package com.tracability.main;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -15,6 +17,7 @@ import org.kie.api.runtime.StatelessKieSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.rabbitmq.client.*;
 import com.tracability.event.DangeresousConditionGasEvent;
 import com.tracability.event.Event;
 import com.tracability.event.TemperatureEvent;
@@ -23,11 +26,51 @@ import com.tracability.model.Package;
 import com.tracability.rule.Condition;
 import com.tracability.rule.Rule;
 public class MainApp {
+
+	// Nom du pipe utilisé sur RABBIT MQ pour la transaction du message
+	private final static String QUEUE_NAME = "FileDesMessages";
 	private static Measures currentMeasure;
 	private static AlertDecision alertDecion;
 	public static void main(String[] args) throws Exception {
 		/*Toutes les minutes on éxécute le code ci-dessous*/
 		do {
+	/*********************************************************************************ALEXIS********************************************************************/
+
+        ConnectionFactory factory = new ConnectionFactory();
+        // Adresse IP
+        factory.setHost("localhost");
+        // Création de la connexion
+        Connection connection = factory.newConnection();
+        // Création d'un canal dans la connexion AMQP
+        Channel channel = connection.createChannel();
+        // Déclaration de la queue ( qui existe déjà car créée par le producteur )
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+
+        Consumer consumer = new DefaultConsumer(channel) {
+          @Override
+          public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
+              throws IOException {
+            // on récupère la chaine de byte et on la transforme en string
+            String mesures = new String(body, "UTF-8");
+            // La chaine de caractère récupérée, on la sysout pour les tests
+            System.out.println(" [x] Received '" + mesures + "'");
+			// Cast de la chaine de caractère reçue en format JSON
+			JSONObject jsonObj = new JSONObject(mesures);
+			//* ICI : TRANSFORMEZ L'Object JSON suivant :
+			//{"creationDate":"2018-09-05T21:03:10.494Z","storageArea":"","measures":[{"type":"gaz","name":"CO2","value":"1","unit":"%",
+			//"creationDate":"2018-09-05T21:03:10.494Z"},{"type":"gaz","name":"O2","value":"25",
+			//"unit":"%","creationDate":"2018-09-05T21:03:10.494Z"},{"type":"temperatureHumidity"
+			//,"creationDate":"2018-09-05T21:03:10.494Z","temperature":25,"temperatureUnit":"°C","humidity":30,"humidityUnit":"%"}],"tags":[
+			//{"valeur":"adresse_mac_detectee_1","creationDate":"2018-09-05T21:03:10.494Z"},{"valeur":"adresse_mac_detectee_2","creationDate":"2018-09-05T21:03:10.494Z"},
+			//{"valeur":"adresse_mac_detectee_3","creationDate":"2018-09-05T21:03:10.494Z"}]}
+			// EN OBJET JAVA POUR QUE NASSIM PUISSE MANIPULER AINSI LES DONNEES
+          }
+        };
+        // Démarre le consommateur déclaré au dessus ( ne pas toucher, nécessite de bien comprendre RabbitMQ. EN GROS, CA EXECUTE CE QUE VOUS AVEZ DECLARE
+        channel.basicConsume(QUEUE_NAME, true, consumer);
+/*********************************************************************************ALEXIS******************************************************************* */
+
 			/*1. Récupérer les données du serveur AMQP
 			 *  Format donnée
 			 *	{
