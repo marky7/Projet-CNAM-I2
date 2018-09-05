@@ -18,29 +18,49 @@
 
 var getNow = function(){
     return new Date().toISOString();
-}
+};
 
 //**************************************** DEFAULT DATA ****************************************//
 // Create Default DATA to send via RabbitMQ
 
-
-// Bluetooth Devices detected
-var createBluetoothDevicesDetected = function(){
-    return ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
-}
+function FixedPlace(place,description){
+    this.address = place;
+    this.description = description;
+    this.isMobile = false;
+    this.creationDate = getNow();
+};
 
 // Temperature and Humidity detected
-var createTemperatureHumidity = function(){
-    var creationDate = getNow();
-    return {temperature:25, temperatureUnit:'°C', humidity:35, humidityUnit:'%', creationDate:creationDate};
-}
+function TemperatureHumidity(temperature,temperatureUnit,humidity,humidityUnit){
+    this.type = 'temperatureHumidity';
+    this.creationDate = getNow();
+    this.temperature = temperature;
+    this.temperatureUnit = temperatureUnit;
+    this.humidity = humidity;
+    this.humidityUnit = humidityUnit;
+};
 
 // Gaz Detected
-var createMeasuredGas = function(){
-    var creationDate = getNow();
-    return [{name:'CO2',description:'',value:'1',unit:'%',creationDate:creationDate},{name:'O2',description:'',value:'50',unit:'%',creationDate:creationDate}];
-}
+function Gaz(name,value,unit,description){
+    this.type = 'gaz';
+    this.name = name;
+    this.value = value;
+    this.unit = unit;
+    this.creationDate = getNow();
+    this.description = description;
+};
 
+var gaz1 = new Gaz('CO2','1','%');
+var gaz2 = new Gaz('O2','25','%');
+var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
+var bluetoothDevicesDetected = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+
+function Acquisition(measures,tags){
+    this.creationDate = getNow();
+    this.storageArea = '';
+    this.measures: measures;
+    this.tags: tags;
+};
 
 //**************************************** ALEXIS ****************************************//
 
