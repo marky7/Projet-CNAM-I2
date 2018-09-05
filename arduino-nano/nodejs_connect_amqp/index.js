@@ -14,8 +14,6 @@
 // console.log('data received: ' + data);
 // });
 //});
-
-
 var getNow = function(){
     return new Date().toISOString();
 };
@@ -53,8 +51,8 @@ function Gaz(name,value,unit,description){
 function Acquisition(measures,tags){
     this.creationDate = getNow();
     this.storageArea = '';
-    this.measures: measures;
-    this.tags: tags;
+    this.measures= measures;
+    this.tags= tags;
 }
 
 function Tag(valeur){
