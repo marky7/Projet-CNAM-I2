@@ -14,6 +14,19 @@
 // console.log('data received: ' + data);
 // });
 //});
+
+
+console.log('Initialisation du protocole AMQP : un message va être envoyé toute les 5 secondes...');
+a = 0;
+function refreshData()
+{
+    x = 5;  // 5 Seconds
+    console.log('---------------------------------------------------DEBUT-------------------------------------------------------');
+    console.log('Envoi du message numéro : '+a);
+    // Do your thing here
+    a++;
+
+
 var getNow = function(){
     return new Date().toISOString();
 };
@@ -75,26 +88,50 @@ for(var i=0;i<macAdresses.length;i++){
 
 var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
 var acquisitionToString = JSON.stringify(acquisition);
+console.log('---------------------------------------------------------------------------------');
+console.log('Création du message au format String');
+console.log('---------------------------------------------------------------------------------');
 console.log(acquisitionToString);
+console.log('---------------------------------------------------------------------------------');
+var queue = 'fileDesMessages';
 
 
-// Apparement, require ne s'utilise plus avec ECMAScript, il faudrait faire un import.
-var amqp = require('amqplib/callback_api');
 
-// Création de la connexion
-amqp.connect('amqp://localhost', function(err, conn) {
-// Création de la queue
-conn.createChannel(function(err, ch) {
-// Nommage de la queue
-var queue = 'FileDesMessages';
-// Insertion
-ch.assertQueue(queue, {durable: false});
-// Envoie du message (messageToSent)
-console.log('Envoie du message... -------------------------------------------------------------')
-ch.sendToQueue(queue, Buffer.from(acquisitionToString));
-console.log(" [x] Sent %s ---------------------------------------------------------------- /n", messageToSent);
-});
-setTimeout(function() { conn.close(); process.exit(0) }, 500);
-});
-//**************************************** ALEXIS ****************************************//
+function bail(err) {
+  console.error(err);
+  process.exit(1);
+}
+
+// Publisher
+function publisher(conn) {
+  conn.createChannel(on_open);
+  function on_open(err, ch) {
+    if (err != null) bail(err);
+    ch.assertQueue(queue);
+console.log('Création de la queue : '+queue);
+console.log('---------------------------------------------------------------------------------');
+    ch.sendToQueue(queue, Buffer.from(acquisitionToString));
+console.log('Envoi du message dans la queue nommée : '+queue);
+console.log('---------------------------------------------------------------------------------');
+console.log('Fin de la transmission. Vérifiez si le consommateur a reçu le message');
+console.log('--------------------------------------------------FIN------------------------------------------------------');
+
+
+  }
+}
+
+ 
+require('amqplib/callback_api')
+  .connect('amqp://localhost', function(err, conn) {
+    if (err != null) bail(err);
+    publisher(conn);
+  });
+
+setTimeout(refreshData, x*1000);
+}
+
+
+refreshData(); // execute function
+
+
 
