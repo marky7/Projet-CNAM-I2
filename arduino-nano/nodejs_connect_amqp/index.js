@@ -93,7 +93,7 @@ console.log('Création du message au format String');
 console.log('---------------------------------------------------------------------------------');
 console.log(acquisitionToString);
 console.log('---------------------------------------------------------------------------------');
-var queue = 'fileDesMessages';
+var queue = 'FileDesMessages';
 
 
 
