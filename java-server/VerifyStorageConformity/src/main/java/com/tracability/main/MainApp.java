@@ -56,15 +56,19 @@ public class MainApp {
             // La chaine de caractère récupérée, on la sysout pour les tests
             System.out.println(" [x] Received '" + mesures + "'");
 			// Cast de la chaine de caractère reçue en format JSON
-			JSONObject jsonObj = new JSONObject(mesures);
-			//* ICI : TRANSFORMEZ L'Object JSON suivant :
+			System.out.println(" ------------------------------------------------------------------------------------------------------------------------------");
+        	System.out.println(" Tentative de conversion...");
+			//* ICI : Transformation de la chaine de caractère en JSON
+			try{ JSONObject jsonObj = new JSONObject(message);System.out.println(" Conversion réussie! Message suivant...");}
+			catch(Exception e){e.printStackTrace(); System.out.println("Erreur lors de la conversion!");}    
+      							}
 			//{"creationDate":"2018-09-05T21:03:10.494Z","storageArea":"","measures":[{"type":"gaz","name":"CO2","value":"1","unit":"%",
 			//"creationDate":"2018-09-05T21:03:10.494Z"},{"type":"gaz","name":"O2","value":"25",
 			//"unit":"%","creationDate":"2018-09-05T21:03:10.494Z"},{"type":"temperatureHumidity"
 			//,"creationDate":"2018-09-05T21:03:10.494Z","temperature":25,"temperatureUnit":"°C","humidity":30,"humidityUnit":"%"}],"tags":[
 			//{"valeur":"adresse_mac_detectee_1","creationDate":"2018-09-05T21:03:10.494Z"},{"valeur":"adresse_mac_detectee_2","creationDate":"2018-09-05T21:03:10.494Z"},
 			//{"valeur":"adresse_mac_detectee_3","creationDate":"2018-09-05T21:03:10.494Z"}]}
-			// EN OBJET JAVA POUR QUE NASSIM PUISSE MANIPULER AINSI LES DONNEES
+			
           }
         };
         // Démarre le consommateur déclaré au dessus ( ne pas toucher, nécessite de bien comprendre RabbitMQ. EN GROS, CA EXECUTE CE QUE VOUS AVEZ DECLARE
