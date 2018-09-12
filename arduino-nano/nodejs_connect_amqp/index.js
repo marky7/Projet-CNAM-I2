@@ -1,37 +1,38 @@
-//var SerialPort = require('serialport');
-
-//var serialPort = new SerialPort('/dev/ttyUSB0', {
-// baudRate: 115200
-//});
-
-// it opens the connection and register an event 'data'
-//serialPort.on("open", function () {
-// console.log('Communication is on!');
-
-// when your app receives data, this event is fired
-// so you can capture the data and do what you need
-// serialPort.on('data', function(data) {
-// console.log('data received: ' + data);
-// });
-//});
 
 
-console.log('Initialisation du protocole AMQP : un message va être envoyé toute les 5 secondes...');
-a = 0;
-function refreshData()
-{
-    x = 5;  // 5 Seconds
-    console.log('---------------------------------------------------DEBUT-------------------------------------------------------');
-    console.log('Envoi du message numéro : '+a);
-    // Do your thing here
-    a++;
+console.log('INITIALISATION DU PROTOCOLE AMQP : un message va être envoyé TOUTE les 5 secondes...');
+console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
 
+//**************************************** DEFAULT DATA ****************************************//
+// Iterator : Message number
+var a = 0;
+// Tags
+var tags = [];
+// Gaz 1
+var gaz1;
+// Gaz 2
+var gaz2;
+// Temperature and Humidty
+var temperatureHumidity;
+// Mac Adress
+var macAdresses;
+// Json object with measures
+var acquisition;
+// Casting into string to communicate with AMQP
+var acquisitionToString;
+// Timer for iterating
+timer = 3; // 3 seconds
+// AMQP object used for connection
+var amqp = require('amqplib/callback_api');
+// Queue used to send a message
+var q = 'file';
+//**************************************** DEFAULT DATA ****************************************//
 
+// About time?
 var getNow = function(){
     return new Date().toISOString();
 };
 
-//**************************************** DEFAULT DATA ****************************************//
 // Create Default DATA to send via RabbitMQ
 
 function FixedPlace(place,description){
@@ -56,7 +57,7 @@ function Gaz(name,value,unit,description){
     this.type = 'gaz';
     this.name = name;
     this.value = value;
-    this.unit = unit;
+    this.unit = unit;   
     this.creationDate = getNow();
     this.description = description;
 }
@@ -73,62 +74,47 @@ function Tag(valeur){
     this.creationDate = getNow();
 }
 
-var tags = [];
+// ******************************************************** MAIN FUNCTION ************************************************************************* //
+// ************************************************************************************************************************************************ //
 
-var gaz1 = new Gaz('CO2','1','%');
-var gaz2 = new Gaz('O2','25','%');
-var temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
-var macAdresses = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+ function refreshData(){
+// **************************************************** CATCH DATA FROM ARDUINO ****************************************************
+    gaz1 = new Gaz('CO2','1','%');
+    gaz2 = new Gaz('O2','25','%');
+    temperatureHumidity = new TemperatureHumidity(25,'°C',30,'%');
+    macAdresses = ['adresse_mac_detectee_1','adresse_mac_detectee_2','adresse_mac_detectee_3'];
+    // Create Tags
+    for(var i=0;i<macAdresses.length;i++){
+       tags.push(new Tag(macAdresses[i]));
+    } 
+    acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
+// *********************************************************************************************************************************
+// **************************************************** CASTING DATA INTO JSON *****************************************************
+    console.log('Création du message au format String!');
+    acquisitionToString = JSON.stringify(acquisition);
+    console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
 
-// Create Tags
-for(var i=0;i<macAdresses.length;i++){
-   tags.push(new Tag(macAdresses[i]));
-}
+// *********************************************************************************************************************************
+console.log('Formatage en chaine de caractère réussi!');
+// **************************************************** Send message with AMQP******************************************************
 
-
-var acquisition = new Acquisition([gaz1,gaz2,temperatureHumidity],tags);
-var acquisitionToString = JSON.stringify(acquisition);
-console.log('---------------------------------------------------------------------------------');
-console.log('Création du message au format String');
-console.log('---------------------------------------------------------------------------------');
-console.log(acquisitionToString);
-console.log('---------------------------------------------------------------------------------');
-var queue = 'FileDesMessages';
-
-
-
-function bail(err) {
-  console.error(err);
-  process.exit(1);
-}
-
-// Publisher
-function publisher(conn) {
-  conn.createChannel(on_open);
-  function on_open(err, ch) {
-    if (err != null) bail(err);
-    ch.assertQueue(queue);
-console.log('Création de la queue : '+queue);
-console.log('---------------------------------------------------------------------------------');
-    ch.sendToQueue(queue, Buffer.from(acquisitionToString));
-console.log('Envoi du message dans la queue nommée : '+queue);
-console.log('---------------------------------------------------------------------------------');
-console.log('Fin de la transmission. Vérifiez si le consommateur a reçu le message');
-console.log('--------------------------------------------------FIN------------------------------------------------------');
-
-
-  }
-}
-
- 
-require('amqplib/callback_api')
-  .connect('amqp://localhost', function(err, conn) {
-    if (err != null) bail(err);
-    publisher(conn);
+amqp.connect('amqp://localhost', function(err, conn) {
+  conn.createChannel(function(err, ch) {
+    ch.assertQueue(q, {durable: false});
+    console.log('-------------------------------------------------------------------DEBUT DE LA TRANSMISSION-----------------------------------------------------------------------');
+    console.log('Envoi du message numéro : '+a);
+    ch.sendToQueue(q, Buffer.from(acquisitionToString));
+    console.log("Contenu du message : "+acquisitionToString)
+    console.log('-------------------------------------------------------------------FIN DE LA TRANSMISSION-------------------------------------------------------------------------');
+    conn.close(); 
   });
 
-setTimeout(refreshData, x*1000);
+});
+    a++;
+    setTimeout(refreshData, timer*1000);
 }
+// ************************************************************************************************************************************************ //
+// ************************************************************************************************************************************************ //
 
 
 refreshData(); // execute function
