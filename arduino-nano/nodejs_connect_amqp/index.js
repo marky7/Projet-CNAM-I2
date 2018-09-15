@@ -25,7 +25,7 @@ timer = 3; // 3 seconds
 // AMQP object used for connection
 var amqp = require('amqplib/callback_api');
 // Queue used to send a message
-var q = 'file';
+var q = 'file3';
 //**************************************** DEFAULT DATA ****************************************//
 
 // About time?
