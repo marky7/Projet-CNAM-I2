@@ -118,4 +118,3 @@ console.log('------------------------------------- Fermeture de la connexion----
 refreshData(); // execute function
 
 
-
