@@ -1,14 +1,25 @@
 #include <Wire.h>
 #include <MutichannelGasSensor.h>
+#include <DHT.h>
+
+#define DHTPIN 2 // Declaration du pin du DHT
+#define DHTTYPE DHT22 // DHT 22
+DHT dht(DHTPIN, DHTTYPE); // Initialisation du capteur
 
 void setup()
 {
+  // Arduino Nano
+  // SDA -> A4
+  // SCL -> A5
   Serial.begin(115200);  // start serial for output
-  Serial.println("power on!");
+  Serial.println("Power on!");
   gas.begin(0x04);//the default I2C address of the slave is 0x04
   gas.powerOn();
   Serial.print("Firmware Version = ");
   Serial.println(gas.getVersion());
+  dht.begin();
+  // Pause en début pour laisser le temps au capteur dht de démarrer
+  delay(5000);
 }
 
 void loop()
@@ -63,5 +74,20 @@ void loop()
   else Serial.print("invalid");
   Serial.println(" ppm");
 
-  delay(1000);
+  
+  // ---------------------------------------- //
+  // ----- Get Humidity and Temperature ----- //
+  // ---------------------------------------- //
+
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  
+  Serial.print("Humidity: ");
+  Serial.print(h);
+  Serial.print(" %t");
+  Serial.print("Temperature: ");
+  Serial.print(t);
+  Serial.println(" *C ");
+  
+  delay(5000);
 }
