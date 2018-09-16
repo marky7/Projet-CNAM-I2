@@ -22,10 +22,7 @@ var acquisition;
 var acquisitionToString;
 // Timer for iterating
 timer = 3; // 3 seconds
-// AMQP object used for connection
-var amqp = require('amqplib/callback_api');
-// Queue used to send a message
-var q = 'file3';
+
 //**************************************** DEFAULT DATA ****************************************//
 
 // About time?
@@ -97,18 +94,19 @@ function Tag(valeur){
 // *********************************************************************************************************************************
 console.log('Formatage en chaine de caractère réussi!');
 // **************************************************** Send message with AMQP******************************************************
+var amqp = require('amqplib/callback_api');
 
 amqp.connect('amqp://localhost', function(err, conn) {
   conn.createChannel(function(err, ch) {
-    ch.assertQueue(q, {durable: false});
-    console.log('-------------------------------------------------------------------DEBUT DE LA TRANSMISSION-----------------------------------------------------------------------');
-    console.log('Envoi du message numéro : '+a);
-    ch.sendToQueue(q, Buffer.from(acquisitionToString));
-    console.log("Contenu du message : "+acquisitionToString)
-    console.log('-------------------------------------------------------------------FIN DE LA TRANSMISSION-------------------------------------------------------------------------');
-    conn.close(); 
-  });
+    var q = 'hello';
+    var msg = 'Hello World!';
 
+    ch.assertQueue(q, {durable: false});
+    ch.sendToQueue(q, Buffer.from(acquisitionToString));
+    console.log(" [x] Sent %s", acquisitionToString);
+  });
+  setTimeout(function() { conn.close();
+console.log('------------------------------------- Fermeture de la connexion------------------------------------------------'); }, 500);
 });
     a++;
     setTimeout(refreshData, timer*1000);
