@@ -122,3 +122,5 @@ void loop()
 
 }
 
+// RAM errors see : https://arduinojson.org/v5/faq/why-some-parts-are-missing/
+// https://arduinojson.org/v5/assistant/
