@@ -94,20 +94,29 @@ function Tag(valeur){
 // *********************************************************************************************************************************
 console.log('Formatage en chaine de caractère réussi!');
 // **************************************************** Send message with AMQP******************************************************
-var amqp = require('amqplib/callback_api');
+var q = 'file3';
 
-amqp.connect('amqp://localhost', function(err, conn) {
-  conn.createChannel(function(err, ch) {
-    var q = 'hello';
-    var msg = 'Hello World!';
+function bail(err) {
+  console.error(err);
+  process.exit(1);
+}
 
-    ch.assertQueue(q, {durable: false});
-    ch.sendToQueue(q, Buffer.from(acquisitionToString));
-    console.log(" [x] Sent %s", acquisitionToString);
+// Publisher
+function publisher(conn) {
+  conn.createChannel(on_open);
+  function on_open(err, ch) {
+    if (err != null) bail(err);
+    ch.assertQueue(q);
+    ch.sendToQueue(q, Buffer.from('something to do'));
+  }
+}
+
+
+require('amqplib/callback_api')
+  .connect('amqp://172.17.0.2:5672', function(err, conn) {
+    if (err != null) bail(err);
+    publisher(conn);
   });
-  setTimeout(function() { conn.close();
-console.log('------------------------------------- Fermeture de la connexion------------------------------------------------'); }, 500);
-});
     a++;
     setTimeout(refreshData, timer*1000);
 }
