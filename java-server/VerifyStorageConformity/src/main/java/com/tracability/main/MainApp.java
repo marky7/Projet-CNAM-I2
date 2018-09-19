@@ -38,7 +38,7 @@ public class MainApp {
 
         ConnectionFactory factory = new ConnectionFactory();
         // Adresse IP
-        factory.setHost("localhost");
+        factory.setHost("172.17.0.2:5672");
         // Création de la connexion
         Connection connection = factory.newConnection();
         // Création d'un canal dans la connexion AMQP
