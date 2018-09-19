@@ -1,0 +1,44 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4 class="card-title ">Alert</h4>
+                                <p class="card-category"> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th class="info">Alert Id</th>
+                                    <th class="info">Description</th>
+                                    <th class="info">Type</th>
+                                    <th class="info">Status</th>
+                                    <th class="info">Creation Date</th>
+                                    <th class="info">Users</th>
+                                    <th class="info">Package</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let asset of allAssets">
+                                        <td class="asset-properties">{{asset.alertId}}</td>
+                                        <td class="asset-properties">{{asset.description}}</td>
+                                        <td class="asset-properties">{{asset.type}}</td>
+                                        <td class="asset-properties">{{asset.status}}</td>
+                                        <td class="asset-properties">{{asset.creationDate}}</td>
+                                        <td class="asset-properties">{{asset.users}}</td>
+                                        <td class="asset-properties">{{asset.package}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
