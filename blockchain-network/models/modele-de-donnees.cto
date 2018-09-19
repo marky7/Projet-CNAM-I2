@@ -15,6 +15,9 @@ transaction ruleCreation {
   o String description
   o String type
   o DateTime creationDate
+  o String measureType
+  o String operator
+  o String value
 }
 
 transaction routeCreation {
@@ -198,7 +201,7 @@ asset Attachment identified by attachmentId {
   o String name
   o String path
   o DateTime creationDate
-  --> Package package
+  --> Package package optional
 }
 asset Alert identified by alertId {
   o String alertId
@@ -251,11 +254,11 @@ asset Package identified by packageId {
   o String description
   o DateTime creationDate
   o DateTime deliveryDate
-  --> Customer customer
-  --> Provider provider
-  --> Tag tag
-  --> Attachment[] attachments
-  --> Product[] products
+  --> Customer customer optional
+  --> Provider provider optional
+  --> Tag tag optional
+  --> Attachment[] attachments optional
+  --> Product[] products optional
 }
 asset PositionGPS extends Measure {
   o Double latitude
@@ -266,7 +269,7 @@ asset Product identified by productId {
   o String label
   o String description
   o DateTime creationDate
-  --> ProductProfile productProfile
+  --> ProductProfile productProfile optional
 }
 
 asset ProductProfile identified by productProfileId {
@@ -274,7 +277,7 @@ asset ProductProfile identified by productProfileId {
   o String label
   o String description
   o DateTime creationDate
-  --> Standart[] standarts
+  --> Standart[] standarts optional
 }
 asset Route identified by routeId {
   o String routeId
@@ -286,13 +289,16 @@ asset Rule identified by ruleId {
   o String description
   o String type
   o DateTime creationDate
+  o String measureType
+  o String operator
+  o String value
 }
 asset Standart identified by standartId {
   o String standartId
   o String description
   o DateTime creationDate
-  --> Country[] country
-  --> Rule[] rules
+  --> Country[] country optional
+  --> Rule[] rules optional
 }
 abstract asset StorageArea identified by storageAreaId {
   o String storageAreaId

@@ -99,6 +99,9 @@ async function createRule(tx)
     asset.name = tx.name
     asset.description = tx.description
     asset.creationDate = tx.creationDate
+    asset.measureType = tx.measureType
+    asset.operator = tx.operator
+    asset.value = tx.value
  
     await registry.add(asset)
 }
