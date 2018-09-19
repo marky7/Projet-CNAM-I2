@@ -112,11 +112,11 @@ function publisher(conn) {
   conn.createChannel(on_open);
   function on_open(err, ch) {
     if (err != null) bail(err);
-    ch.assertQueue(acquisitionToString);
-    ch.sendToQueue(acquisitionToString, Buffer.from('something to do'));
+    ch.assertQueue(q);
+    ch.sendToQueue(q, Buffer.from(acquisitionToString));
     console.log('Envoi du message réussi!')
     console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
-    console.log('Fermeture de la');
+    console.log('Fermeture de la connexion');
     console.log('------------------------------------------------------------------------------------------------------------------------------------------------------------------');
 
   }
