@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { TableListComponent } from '../../table-list/table-list.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { MesuresComponent } from '../../mesures/mesures.component';
 
 import {
   MatButtonModule,
@@ -25,7 +26,8 @@ import {
   ],
   declarations: [
     TableListComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    MesuresComponent
   ]
 })
 

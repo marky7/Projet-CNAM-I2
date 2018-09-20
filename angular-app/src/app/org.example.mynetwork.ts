@@ -65,3 +65,11 @@ export class Alert extends Asset {
     users: User[];
     package: Package;
   }
+
+  export class TemperatureHumidity extends Asset {
+    measureId: String;
+    type: String;
+    temperature: Number;
+    humidity: Number;
+    packages: Package[];
+  }
