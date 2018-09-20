@@ -6,7 +6,7 @@
                     <div class="card-header card-header-danger">
                         <div class="row">
                             <div class="col-md-8">
-                                <h4 class="card-title ">Alert</h4>
+                                <h4 class="card-title ">Mesures</h4>
                                 <p class="card-category"> </p>
                             </div>
                         </div>
@@ -15,21 +15,19 @@
                         <div class="table-responsive">
                             <table class="table ">
                                 <thead class="">
-                                    <th class="info">Alert Id</th>
-                                    <th class="info">Description</th>
+                                    <th class="info">Measure Id</th>
                                     <th class="info">Type</th>
-                                    <th class="info">Status</th>
-                                    <th class="info">Creation Date</th>
-                                    <th class="info">Package</th>
+                                    <th class="info">Temperature</th>
+                                    <th class="info">Humidity</th>
+                                    <th class="info">Packages Id</th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let asset of allAssets">
-                                        <td class="asset-properties">{{asset.alertId}}</td>
-                                        <td class="asset-properties">{{asset.description}}</td>
+                                        <td class="asset-properties">{{asset.measureId}}</td>
                                         <td class="asset-properties">{{asset.type}}</td>
-                                        <td class="asset-properties">{{asset.status}}</td>
-                                        <td class="asset-properties">{{asset.creationDate}}</td>
-                                        <td class="asset-properties">{{asset.package}}</td>
+                                        <td class="asset-properties">{{asset.temperature}}</td>
+                                        <td class="asset-properties">{{asset.humidity}}</td>
+                                        <td class="asset-properties"><div  *ngFor="let pack of asset.packages">{{pack.packageId}}</div></td>
                                     </tr>
                                 </tbody>
                             </table>

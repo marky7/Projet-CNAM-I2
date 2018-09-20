@@ -12,7 +12,7 @@ echo "
 # _____________________________________________________________ #
 "
 cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp
-npm start
+npm start &
 
 
 echo "
@@ -33,15 +33,6 @@ echo "
 composer-rest-server -c admin@package-traceability-network -n never -w true &
 sleep 3
 
-echo "
-# _________________________________________________________________ #
-# ___ Démarrer l'application Front-End Angular (localhost:4200) ___ #
-# _________________________________________________________________ #
-"
-cd ~/Dev/Package_Traceability/angular-app 
-npm start &
-sleep 3
-
 
 echo "
 # _____________________________________________________ #
@@ -49,6 +40,16 @@ echo "
 # _____________________________________________________ #
 "
 composer-playground &
+sleep 3
+
+
+echo "
+# _________________________________________________________________ #
+# ___ Démarrer l'application Front-End Angular (localhost:4200) ___ #
+# _________________________________________________________________ #
+"
+cd ~/Dev/Package_Traceability/angular-app 
+npm start 
 sleep 3
 
 

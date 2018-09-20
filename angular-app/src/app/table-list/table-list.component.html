@@ -13,13 +13,12 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table ">
                                 <thead class="">
                                     <th class="info">Package Id</th>
                                     <th class="info">Description</th>
                                     <th class="info">Creation Date</th>
                                     <th class="info">Delivery Date</th>
-                                    <th class="info">Customer</th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let asset of allAssets">
@@ -27,7 +26,6 @@
                                         <td class="asset-properties">{{asset.description}}</td>
                                         <td class="asset-properties">{{asset.creationDate}}</td>
                                         <td class="asset-properties">{{asset.deliveryDate}}</td>
-                                        <td class="asset-properties">{{asset.customer}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -35,104 +33,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="addAssetModal" tabindex="-1" role="dialog" aria-labelledby="addAssetModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="addAssetModalLabel">Create asset</h4>
-            </div>
-            <form [formGroup]="myForm">
-                <div class="modal-body">
-                    <div class="form-group text-left">
-                        <label for="packageId">Package Id</label>
-                        <input formControlName="packageId" type="text" class="form-control">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="description">Description</label>
-                        <textarea formControlName="description" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="creationDate">Creation Date</label>
-                        <input formControlName="creationDate" type="date" class="form-control">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="deliveryDate">Delivery Date</label>
-                        <input formControlName="deliveryDate" type="date" step='any' class="form-control">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="customer">customer</label>
-                        <input formControlName="customer" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button (click)="addAsset(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="updateAssetModal" tabindex="-1" role="dialog" aria-labelledby="updateAssetModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="updateAssetModalLabel">Update Asset</h4>
-            </div>
-            <form [formGroup]="myForm">
-                <div class="modal-body">
-                    <div class="form-group text-left">
-                        <label for="packageId">Package Id</label>
-                        <input [ngModel]="packageId" formControlName="packageId" class="form-control" disabled="disabled">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="description">Description</label>
-                        <textarea [ngModel]="customer" formControlName="description" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="creationDate">Creation Date</label>
-                        <input [ngModel]="creationDate" formControlName="creationDate" type="date" class="form-control">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="deliveryDate">Delivery Date</label>
-                        <input [ngModel]="deliveryDate" formControlName="deliveryDate" type="date" step='any' class="form-control">
-                    </div>
-                    <div class="form-group text-left">
-                        <label for="customer">Customer</label>
-                        <input [ngModel]="description" formControlName="customer" type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button (click)="updateAsset(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="deleteAssetModal" tabindex="-1" role="dialog" aria-labelledby="deleteAssetModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="deleteAssetModalLabel">Delete Asset</h4>
-            </div>
-            <form [formGroup]="myForm">
-                <div class="modal-body">
-                    Are you sure you want to delete this asset?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                    <button (click)="deleteAsset()" type="submit" class="btn btn-danger" data-dismiss="modal">Yes</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>

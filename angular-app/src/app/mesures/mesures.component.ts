@@ -1,17 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { TableListService } from './TableList.service';
+import { MesuresService } from './mesures.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css'],
-  providers: [TableListService]
+  selector: 'app-mesures',
+  templateUrl: './mesures.component.html',
+  styleUrls: ['./mesures.component.css'],
+  providers: [MesuresService]
 
 })
-export class TableListComponent implements OnInit {
+export class MesuresComponent implements OnInit {
 
   myForm: FormGroup;
 
@@ -20,19 +20,19 @@ export class TableListComponent implements OnInit {
   private currentId;
   private errorMessage;
 
-  packageId = new FormControl('', Validators.required);
-  description = new FormControl('', Validators.required);
-  creationDate = new FormControl('', Validators.required);
-  deliveryDate = new FormControl('', Validators.required);
-  customer = new FormControl('', Validators.required);
+  measureId = new FormControl('', Validators.required);
+  type = new FormControl('', Validators.required);
+  temperature = new FormControl('', Validators.required);
+  humidity = new FormControl('', Validators.required);
+  packages = new FormControl('', Validators.required);
 
-  constructor(public servicePackage: TableListService, fb: FormBuilder) {
+  constructor(public serviceMesures: MesuresService, fb: FormBuilder) {
     this.myForm = fb.group({
-      packageId: this.packageId,
-      description: this.description,
-      creationDate: this.creationDate,
-      deliveryDate: this.deliveryDate,
-      customer: this.customer,
+      measureId: this.measureId,
+      type: this.type,
+      temperature: this.temperature,
+      humidity: this.humidity,
+      packages: this.packages,
     });
   };
 
@@ -42,7 +42,7 @@ export class TableListComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.servicePackage.getAll()
+    return this.serviceMesures.getAll()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
