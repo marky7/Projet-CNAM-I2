@@ -106,7 +106,7 @@ asset Product identified by productId {
   o String label
   o String description
   o DateTime creationDate
-  --> ProductProfile productProfile optional
+  --> ProductProfile[] productProfile optional
 }
 
 asset ProductProfile identified by productProfileId {
