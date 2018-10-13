@@ -5,7 +5,9 @@ echo "
 # ___ Démarrer l'acquisition de données des entrepots fixes ___ #
 # _____________________________________________________________ #
 "
-cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp_mock
+
+sleep 5
+cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp
 npm start &
 
 

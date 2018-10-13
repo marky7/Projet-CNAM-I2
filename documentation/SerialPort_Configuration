@@ -1,0 +1,17 @@
+// -------------------------------------------------------------------- //
+// --- Accéder au /dev/ttyUSB0 du PC sous Linux depuis une VM Linux --- //
+// -------------------------------------------------------------------- //
+
+// Configurer le serial port de la VM COM1 en périphérique hote
+// Cocher - Se connecter au pipe/socket existant 
+/dev/ttyUSB0
+
+// Lancer la VM et list les tty détectés pour vérifier la présence du device 
+dmesg | grep tty
+
+// Pour avoir les permissions d'accés aux tty devices, il faut appartenir au groupe 'dialout'
+// First check if you are a member of that group:
+groups ${USER}
+sudo gpasswd --add ${USER} dialout
+
+// You then need to log out and log back in again for it to be effective. Then see if it fixes your problem.
