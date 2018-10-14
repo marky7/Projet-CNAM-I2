@@ -5,5 +5,5 @@ query selectPackage {
   description: "Selection du Package depuis un tagid"
   statement:
       SELECT org.example.mynetwork.Package
-       WHERE (tag.tagId == _$tagid)
+       WHERE (tag == _$tagid)
 }

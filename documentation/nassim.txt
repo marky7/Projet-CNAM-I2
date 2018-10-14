@@ -1,0 +1,25 @@
+----- Pour la recherche d'un Package grâce à un tag :
+GET /queries/selectPackage
+
+"resource:org.example.mynetwork.Tag#4682"
+-> 4682 étant l'id du tag
+
+
+
+----- Pour la création d'une acquisition et de ses mesures :
+POST /createAcquisition 
+
+Il faut rajouter dans chaque mesure l'attribut "$class" :
+
+"$class": "org.example.mynetwork.Gas"
+ou
+"$class": "org.example.mynetwork.TemperatureHumidity"
+
+
+
+----- Pour la création d'une acquisition et de ses mesures : measureId
+
+Il faut rajouter dans chaque mesure l'attribut measureId avec un id généré aléatoirement 
+
+
+
