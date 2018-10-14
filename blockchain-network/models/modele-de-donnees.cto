@@ -1,11 +1,11 @@
 namespace org.example.mynetwork
 
 asset Acquisition identified by acquisitionId {
-  o String acquisitionId
-  o DateTime creationDate
-  --> StorageArea storageArea
-  --> Tag[] tags
-  --> Measure[] measures
+  o String acquisitionId 
+  o DateTime creationDate optional
+  --> StorageArea storageArea optional
+  --> Tag[] tags optional
+  --> Measure[] measures optional
 }
 
 asset Assignment identified by assignmentId {
@@ -29,7 +29,7 @@ asset Storage identified by storageId {
   o DateTime endDate
   o DateTime creationDate
   --> StorageArea storageArea
-  --> Package package
+  --> Package packageMeasure
 }
 
 asset Attachment identified by attachmentId {
@@ -41,12 +41,12 @@ asset Attachment identified by attachmentId {
 }
 asset Alert identified by alertId {
   o String alertId
-  o String description
-  o String type
-  o String status
-  o DateTime creationDate
-  --> User[] users
-  --> Package package
+  o String description optional
+  o String type optional
+  o String status optional
+  o DateTime creationDate optional
+  --> User[] users optional
+  --> Package package optional
 }
 asset Country identified by countryId {
   o String countryId
@@ -60,14 +60,16 @@ asset FixedPlace extends StorageArea {
 
 asset Gas extends Measure {
   o Double value
-  --> TreatedGas[] measuredGas
+  o String name optional
+  o String description optional
+  o String unit optional
 }
 
 abstract asset Measure identified by measureId {
   o String measureId
   o String type
   o DateTime creationDate
-  o Package[] packages
+  o Package[] packages optional
 }
 asset Mission identified by missionId {
   o String missionId
@@ -152,10 +154,12 @@ asset TreatedGas identified by treatedGasId {
 asset TemperatureHumidity extends Measure {
   o Double temperature
   o Double humidity
+  o String humidityUnit optional
+  o String temperatureUnit optional
 }
 asset Tag identified by tagId {
   o String tagId
-  o String valeur
+  o String value
   o DateTime creationDate
 }
 participant Customer extends User {
@@ -179,5 +183,35 @@ abstract participant User identified by userId {
   o DateTime creationDate
 }
 participant Provider extends User {
+}
+
+
+transaction createAcquisition {
+  o String acquisitionId optional
+  o DateTime creationDate optional
+  o StorageArea storageArea optional
+  o Tag[] tags optional
+  o Measure[] measures optional
+}
+
+transaction createGas {
+  o Double value optional
+  o String name optional
+  o String description optional
+  o String unit optional
+  o String type optional
+  o DateTime creationDate optional
+}
+
+transaction createTemperatureHumidity {
+  o String name optional
+  o String description optional
+  o String unit optional
+  o Double temperature optional
+  o String humidityUnit optional
+  o Double humidity optional
+  o String temperatureUnit optional
+  o String type optional
+  o DateTime creationDate optional
 }
 
