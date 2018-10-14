@@ -9,13 +9,13 @@ public class Package {
 	private Provider provider;
 	private Customer customer;
 	private List<Product> products;
-	private Date deleveryDate;
+	private String deleveryDate;
 	private List<Attachment> attachments;
 	private Tag tag;
-	private Date creationDate;
+	private String creationDate;
 	
 	public Package(long id, String description, Provider provider, Customer customer, List<Product> products,
-			Date deleveryDate, List<Attachment> attachments, Tag tag, Date creationDate) {
+			String deleveryDate, List<Attachment> attachments, Tag tag, String creationDate) {
 		super();
 		this.id = id;
 		this.description = description;
@@ -64,12 +64,7 @@ public class Package {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-	public Date getDeleveryDate() {
-		return deleveryDate;
-	}
-	public void setDeleveryDate(Date deleveryDate) {
-		this.deleveryDate = deleveryDate;
-	}
+	
 	public List<Attachment> getAttachments() {
 		return attachments;
 	}
@@ -82,11 +77,18 @@ public class Package {
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
-	public Date getCreationDate() {
+	public String getDeleveryDate() {
+		return deleveryDate;
+	}
+	public void setDeleveryDate(String deleveryDate) {
+		this.deleveryDate = deleveryDate;
+	}
+	public String getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
+	
 	
 }
