@@ -2,48 +2,39 @@ package com.tracability.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class Measures {
-	private Date creationDate;
-	private double temperatureValue;
-	private double humidityValue;
-	private HashMap<String, Double> gasValue;
 	
-	public Measures(Date creationDate, double temperatureValue, double humidityValue, HashMap gasValue) {
+	private String creationDate;
+	private String  type;
+	private List<Package> packages;
+	
+	public Measures(String creationDate, String type, List<Package> packages) {
 		super();
 		this.creationDate = creationDate;
-		this.temperatureValue = temperatureValue;
-		this.humidityValue = humidityValue;
-		this.gasValue = gasValue;
+		this.type = type;
+		this.packages = packages;
 	}
-	@Override
-	public String toString() {
-		return "Measures [creationDate=" + creationDate + ", temperatureValue=" + temperatureValue + ", humidityValue="
-				+ humidityValue + ", gasValue=" + gasValue + "]";
-	}
-	public Date getCreationDate() {
+	public String getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-	public double getTemperatureValue() {
-		return temperatureValue;
+	public String getType() {
+		return type;
 	}
-	public void setTemperatureValue(double temperatureValue) {
-		this.temperatureValue = temperatureValue;
+	public void setType(String type) {
+		this.type = type;
 	}
-	public double getHumidityValue() {
-		return humidityValue;
+	public List<Package> getPackages() {
+		return packages;
 	}
-	public void setHumidityValue(double humidityValue) {
-		this.humidityValue = humidityValue;
-	}
-	public HashMap getGasValue() {
-		return gasValue;
-	}
-	public void setGasValue(HashMap gasValue) {
-		this.gasValue = gasValue;
-	}
+	public void setPackages(List<Package> packages) {
+		this.packages = packages;
+	} 
+	
+	
 	
 }
