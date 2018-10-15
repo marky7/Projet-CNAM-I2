@@ -135,7 +135,7 @@ var acquisitionToString;
 
     acquisitionToString = '{"storageArea":{"address":"118_Route de Narbonne, 31400 Toulouse","description":"IPST-CNAM","isMobile":"false"},"tags":[{"creationDate":"2018-10-12T18:17:39.993Z","value":"Adresse_mac1","name":"Colis1"}],"measures":[{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"NH3","description":"ammoniac","value":2.872149,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"C0","description":"carbon_monoxide","value":34.3923,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"NO2","description":"nitrogen_dioxide","value":0.298846,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"C3H8","description":"propane","value":5002.136,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"C4H10","description":"butane","value":2516.637,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"CH4","description":"methane","value":1314815,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"H2","description":"dihydrogen","value":17.08261,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"gas","name":"C2H5OH","description":"ethanol","value":24.58287,"unit":"ppm"},{"creationDate":"2018-10-12T18:17:39.993Z","type":"temperatureHumidity","temperature":24.3,"temperatureUnit":"*C","humidity":66.9,"humidityUnit":"%"}]}';
     // If no one object is created add a default one - Temporary
-    objectToString = objectToString || acquisitionToString;
+    objectToString = objectToString || "";
 
 
     //**************************************** Send message with AMQP ****************************************//
