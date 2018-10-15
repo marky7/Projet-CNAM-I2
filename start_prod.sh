@@ -11,6 +11,17 @@ cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp
 npm start &
 
 
+sleep 10
+echo "
+# _____________________________ #
+# ___ Démarrer Serveur Java ___ #
+# _____________________________ #
+"
+
+cd ~/Dev/Package_Traceability/java-server
+java -jar main-server.jar &
+
+
 
 # Wait for all process are running before displaying final message
 

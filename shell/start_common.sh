@@ -43,15 +43,6 @@ cd ~/Dev/Package_Traceability/angular-app
 npm start 
 sleep 3
 
-echo "
-# _____________________________ #
-# ___ Démarrer Serveur Java ___ #
-# _____________________________ #
-"
-
-cd ~/Dev/Package_Traceability/java-server
-java -jar main-server.jar &
-
 
 
 

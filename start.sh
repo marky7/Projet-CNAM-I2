@@ -9,6 +9,13 @@ cd ~/Dev/Package_Traceability/arduino-nano/nodejs_connect_amqp_mock
 npm start &
 
 
+sleep 10
+echo "
+# _____________________________ #
+# ___ Démarrer Serveur Java ___ #
+# _____________________________ #
+"
+
 
 # Wait for all process are running before displaying final message
 
