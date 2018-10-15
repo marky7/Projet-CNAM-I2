@@ -16,6 +16,10 @@ echo "
 # _____________________________ #
 "
 
+cd ~/Dev/Package_Traceability/java-server
+java -jar main-server.jar &
+
+
 
 # Wait for all process are running before displaying final message
 
